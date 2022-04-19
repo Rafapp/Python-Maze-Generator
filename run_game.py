@@ -35,33 +35,21 @@ background = pg.Rect(0, 0, width, height)
 widthButtonFactor = width / 7
 heightButtonFactor = 100
 
+def blit_text():
+    texts = [generateMazeRender, randomMouseRender, wallFollowerRender, pledgeAlgorithmRender, tremauxAlgorithmRender]
+    
+    for i in range(len(texts)):
+        button_width = widthButtonFactor - buttonFont.size(generateMazeTxt)[0] / 2
+        button_height = heightButtonFactor - buttonFont.size(generateMazeTxt)[1] / 2
+        screen.blit(generateMazeRender, (button_width, button_height * (i + 1)))
+        
+screen.fill('black')
+blit_text()
 #MAIN LOOP
 while running:
     
     pg.display.set_caption("Maze Generator and Solver! : Press ESC to quit")
-    screen.fill('black')
-    pg.draw.rect(screen, 'white', background, 50)
-
-    # Generate maze button
-    BlitText(widthButtonFactor * 1, heightButtonFactor, generateMazeTxt, buttonFont, generateMazeRender)
-
-    # Random mouse solve button
-    BlitText(widthButtonFactor * 2, heightButtonFactor, buttonFont, generateMazeRender)
-
-    # Wall follower solve button
-    BlitText(widthButtonFactor * 3, heightButtonFactor, buttonFont, generateMazeRender)
-    
-    # Pledge algorithm solve button
-    BlitText(widthButtonFactor * 4, heightButtonFactor, buttonFont, generateMazeRender)
-
-    # Tremaux algorithm solve button
-    BlitText(widthButtonFactor * 5, heightButtonFactor, buttonFont, generateMazeRender)
-
-    # Random mouse solve button
-    BlitText(widthButtonFactor * 6, heightButtonFactor, buttonFont, generateMazeRender)
-
-    def BlitText(widthFactor, heightFactor, text, font, render):
-        screen.blit(render, (widthFactor - font.size(text)[0]/2), heightFactor - buttonFont.size(text)[1]/2)
+    pg.draw.rect(screen, 'white', background, 50)    
 
     def GenerateMaze():
         print()
