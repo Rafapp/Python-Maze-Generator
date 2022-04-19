@@ -5,16 +5,13 @@ from pygame.locals import *
 import time
 import random
 
-# VARIABLES
-BLACK   =(35, 39, 42)
-WHITE   =(255,255,255)
-RED     =(255,0,0)
-GREEN   =(0,255,0)
-BLUE    =(0,0,255)
-
 running = True
 
-generateMazeText = "Generate Maze"
+generateMazeTxt = "Generate Maze"
+randomMouseTxt = "Random Mouse Solve"
+wallFollowerTxt = "Wall Follower Solve"
+pledgeAlgorithmTxt = "Pledge Algorithm Solve"
+tremauxAlgorithmTxt = "Tremaux Algorithm Solve"
 
 # INIT
 pg.init()
@@ -26,7 +23,12 @@ height = screen.get_height()
 size = (width, height)
 
 buttonFont = pg.font.Font("Fonts/MINECRAFT.TTF", int(width / 40))
-renderedText = buttonFont.render(generateMazeText, True, WHITE)
+
+generateMazeRender = buttonFont.render(generateMazeTxt, True, 'white')
+randomMouseRender = buttonFont.render(randomMouseTxt, True, 'white')
+wallFollowerRender = buttonFont.render(wallFollowerTxt, True, 'white')
+pledgeAlgorithmRender = buttonFont.render(pledgeAlgorithmTxt, True, 'white')
+tremauxAlgorithmRender = buttonFont.render(tremauxAlgorithmTxt, True, 'white')
 
 background = pg.Rect(0, 0, width, height)
 
@@ -36,12 +38,48 @@ heightButtonFactor = 100
 #MAIN LOOP
 while running:
     
-    pg.display.set_caption("Rafa's Maze Generator and Solver! : Press ESC to quit")
-    screen.fill(BLACK)
-    pg.draw.rect(screen, WHITE, background, 50)
+    pg.display.set_caption("Maze Generator and Solver! : Press ESC to quit")
+    screen.fill('black')
+    pg.draw.rect(screen, 'white', background, 50)
 
     # Generate maze button
-    screen.blit(renderedText, (widthButtonFactor - buttonFont.size(generateMazeText)[0]/2, heightButtonFactor - buttonFont.size(generateMazeText)[1]/2))
+    BlitText(widthButtonFactor * 1, heightButtonFactor, generateMazeTxt, buttonFont, generateMazeRender)
+
+    # Random mouse solve button
+    BlitText(widthButtonFactor * 2, heightButtonFactor, buttonFont, generateMazeRender)
+
+    # Wall follower solve button
+    BlitText(widthButtonFactor * 3, heightButtonFactor, buttonFont, generateMazeRender)
+    
+    # Pledge algorithm solve button
+    BlitText(widthButtonFactor * 4, heightButtonFactor, buttonFont, generateMazeRender)
+
+    # Tremaux algorithm solve button
+    BlitText(widthButtonFactor * 5, heightButtonFactor, buttonFont, generateMazeRender)
+
+    # Random mouse solve button
+    BlitText(widthButtonFactor * 6, heightButtonFactor, buttonFont, generateMazeRender)
+
+    def BlitText(widthFactor, heightFactor, text, font, render):
+        screen.blit(render, (widthFactor - font.size(text)[0]/2), heightFactor - buttonFont.size(text)[1]/2)
+
+    def GenerateMaze():
+        print()
+
+    def RandomMouseSolve():
+        print()
+
+    def WallFollowerSolve():
+        print()
+
+    def PledgeAlgorithmSolve():
+        print()
+
+    def TremauxAlgorithmSolve():
+        print()
+
+    def Reset():
+        print()
     pg.display.update()
 
 # Quit game on esc key
@@ -53,23 +91,7 @@ while running:
             running = False
 pg.quit()
 
-def GenerateMaze():
-    print()
 
-def RandomMouseSolve():
-    print()
-
-def WallFollowerSolve():
-    print()
-
-def PledgeAlgorithmSolve():
-    print()
-
-def TremauxAlgorithmSolve():
-    print()
-
-def Reset():
-    print()
 
 
 
