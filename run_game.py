@@ -4,14 +4,9 @@ import sys
 from pygame.locals import *
 import time
 import random
+from button import Button
 
 running = True
-
-generateMazeTxt = "Generate Maze"
-randomMouseTxt = "Random Mouse Solve"
-wallFollowerTxt = "Wall Follower Solve"
-pledgeAlgorithmTxt = "Pledge Algorithm Solve"
-tremauxAlgorithmTxt = "Tremaux Algorithm Solve"
 
 # INIT
 pg.init()
@@ -24,32 +19,26 @@ size = (width, height)
 
 buttonFont = pg.font.Font("Fonts/MINECRAFT.TTF", int(width / 40))
 
-generateMazeRender = buttonFont.render(generateMazeTxt, True, 'white')
-randomMouseRender = buttonFont.render(randomMouseTxt, True, 'white')
-wallFollowerRender = buttonFont.render(wallFollowerTxt, True, 'white')
-pledgeAlgorithmRender = buttonFont.render(pledgeAlgorithmTxt, True, 'white')
-tremauxAlgorithmRender = buttonFont.render(tremauxAlgorithmTxt, True, 'white')
+generateMazeTxt = "Generate Maze"
+randomMouseTxt = "Random Mouse Solve"
+wallFollowerTxt = "Wall Follower Solve"
+pledgeAlgorithmTxt = "Pledge Algorithm Solve"
+tremauxAlgorithmTxt = "Tremaux Algorithm Solve"
 
-background = pg.Rect(0, 0, width, height)
+generateMazeButton = Button(buttonFont, generateMazeTxt, (0, 0))
+randomMouseButton = Button(buttonFont, randomMouseTxt, (0, generateMazeButton.rect.bottom))
+wallFollowerButton = Button(buttonFont, wallFollowerTxt, (0, randomMouseButton.rect.bottom))
+pledgeAlgorithmButton = Button(buttonFont, pledgeAlgorithmTxt, (0, wallFollowerButton.rect.bottom))
+tremauxAlgorithmButton = Button(buttonFont, tremauxAlgorithmTxt, (0, pledgeAlgorithmButton.rect.bottom))
 
-widthButtonFactor = width / 7
-heightButtonFactor = 100
+buttons = pg.sprite.Group(generateMazeButton,  randomMouseButton, wallFollowerButton, pledgeAlgorithmButton, tremauxAlgorithmButton)
 
-def blit_text():
-    texts = [generateMazeRender, randomMouseRender, wallFollowerRender, pledgeAlgorithmRender, tremauxAlgorithmRender]
-    
-    for i in range(len(texts)):
-        button_width = widthButtonFactor - buttonFont.size(generateMazeTxt)[0] / 2
-        button_height = heightButtonFactor - buttonFont.size(generateMazeTxt)[1] / 2
-        screen.blit(generateMazeRender, (button_width, button_height * (i + 1)))
-        
 screen.fill('black')
-blit_text()
+buttons.draw(screen)
 #MAIN LOOP
 while running:
     
     pg.display.set_caption("Maze Generator and Solver! : Press ESC to quit")
-    pg.draw.rect(screen, 'white', background, 50)    
 
     def GenerateMaze():
         print()
