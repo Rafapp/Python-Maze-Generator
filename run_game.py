@@ -5,7 +5,7 @@ from pygame.locals import *
 import time
 import random
 from button import Button
-from maze import Maze, Cell
+from maze import Maze, Cell, MazeTwo
 
 running = True
 
@@ -35,7 +35,10 @@ tremauxAlgorithmButton = Button(buttonFont, tremauxAlgorithmTxt, (pledgeAlgorith
 buttons = pg.sprite.Group(generateMazeButton,  randomMouseButton, wallFollowerButton, pledgeAlgorithmButton, tremauxAlgorithmButton)
 # self, width, height, xPosition, yPosition, cellSize, screen
 def GenerateMaze():
-    maze = Maze(1500, 800, int(width/2) - 750, int(height/2) - 400, 25, screen)
+    maze_width = width
+    maze_height = height - generateMazeButton.rect.height - 50
+    maze = MazeTwo(100, maze_width, maze_height)
+    
 
 def RandomMouseSolve():
     print()
