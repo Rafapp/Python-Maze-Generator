@@ -20,8 +20,6 @@ class Maze():
                     rect = pg.rect.Rect(i * cellSize, j * cellSize, cellSize, cellSize)
                     rand = random.randrange(0,2)
                     if(rand):
-                        pg.draw.rect(screen, "red", rect)
-                        pg.display.update()
                         pg.draw.rect(screen, "white", rect)
                         pg.display.update()
                     else:

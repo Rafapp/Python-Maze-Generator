@@ -5,7 +5,7 @@ from pygame.locals import *
 import time
 import random
 from button import Button
-from maze import Maze, Cell, MazeTwo
+from RafaMaze import Maze
 
 running = True
 
@@ -34,11 +34,13 @@ tremauxAlgorithmButton = Button(buttonFont, tremauxAlgorithmTxt, (pledgeAlgorith
 
 buttons = pg.sprite.Group(generateMazeButton,  randomMouseButton, wallFollowerButton, pledgeAlgorithmButton, tremauxAlgorithmButton)
 
-# self, width, height, xPosition, yPosition, cellSize, screen
 def GenerateMaze():
-    maze_width = width
-    maze_height = height - generateMazeButton.rect.height - 50
-    maze = MazeTwo(100, maze_width, maze_height)
+    # FOR SOME REASON HAS TO BE EQUILATERAL, FIX LATER
+    maze_width = 50
+    maze_height = 50
+
+    # self, width, height, xPosition, yPosition, cellSize, screen
+    rafamaze = Maze(maze_width, maze_height, int(width / 2) - int(maze_width / 2), int(height / 2) - int(maze_height / 2), 10, screen)
     
 
 def RandomMouseSolve():
@@ -73,8 +75,6 @@ buttons.update()
 while running:
     
     pg.display.set_caption("Maze Generator and Solver! : Press ESC to quit")
-    
-
     pg.display.update()
 
 # Quit game on esc key
