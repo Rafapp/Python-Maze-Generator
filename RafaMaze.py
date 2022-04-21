@@ -10,6 +10,7 @@ class Maze():
         self.yPosition = yPosition
         self.cellSize = cellSize
         self.screen = screen
+        
         maze = [[True for x in range(width)] for y in range(height)]
         
         def RenderMaze():

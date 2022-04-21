@@ -38,9 +38,10 @@ def GenerateMaze():
     # FOR SOME REASON HAS TO BE EQUILATERAL, FIX LATER
     maze_width = 50
     maze_height = 50
+    maze_cellsize = 10
 
     # self, width, height, xPosition, yPosition, cellSize, screen
-    rafamaze = Maze(maze_width, maze_height, int(width / 2) - int(maze_width / 2), int(height / 2) - int(maze_height / 2), 10, screen)
+    rafamaze = Maze(maze_width, maze_height, int(width / 2) - int(maze_width / 2) * maze_cellsize, int(height / 2) - int(maze_height / 2) * maze_cellsize , 10, screen)
     
 
 def RandomMouseSolve():
