@@ -54,7 +54,7 @@ def Reset():
 
 dict = {generateMazeButton: GenerateMaze, randomMouseButton: RandomMouseSolve, wallFollowerButton: WallFollowerSolve, pledgeAlgorithmButton:PledgeAlgorithmSolve,tremauxAlgorithmButton:TremauxAlgorithmSolve}
 
-screen.fill('black')
+screen.fill((35,39,42))
 buttons.draw(screen)
 buttons.update()
 #MAIN LOOP

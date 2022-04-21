@@ -12,9 +12,9 @@ class Button(pygame.sprite.Sprite):
     def set_image(self, font : pygame.font.Font, text):
         text_render = font.render(text, True, 'white')
         bg = pygame.Surface((text_render.get_width(), text_render.get_height()))
-        bg.fill('black')
+        bg.fill((35,39,42))
         bg.blit(text_render, (0,0))
         canvas = pygame.Surface((text_render.get_width() + 4, text_render.get_height() + 4))
-        canvas.fill('white')
+        canvas.fill((88,101,242))
         canvas.blit(bg, (2,2))
         self.image = canvas
