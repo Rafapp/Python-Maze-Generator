@@ -33,6 +33,7 @@ pledgeAlgorithmButton = Button(buttonFont, pledgeAlgorithmTxt, (wallFollowerButt
 tremauxAlgorithmButton = Button(buttonFont, tremauxAlgorithmTxt, (pledgeAlgorithmButton.rect.right + 50, 0))
 
 buttons = pg.sprite.Group(generateMazeButton,  randomMouseButton, wallFollowerButton, pledgeAlgorithmButton, tremauxAlgorithmButton)
+
 # self, width, height, xPosition, yPosition, cellSize, screen
 def GenerateMaze():
     maze_width = width
@@ -58,8 +59,16 @@ def Reset():
 dict = {generateMazeButton: GenerateMaze, randomMouseButton: RandomMouseSolve, wallFollowerButton: WallFollowerSolve, pledgeAlgorithmButton:PledgeAlgorithmSolve,tremauxAlgorithmButton:TremauxAlgorithmSolve}
 
 screen.fill((35,39,42))
+
+# Draw navbar background
+navBar = pg.rect.Rect(0,0, screen.get_width(), screen.get_height() / 15)
+pg.draw.rect(screen, (88,101,242), navBar)
+pg.display.update()
+
+# Render buttons
 buttons.draw(screen)
 buttons.update()
+
 #MAIN LOOP
 while running:
     
