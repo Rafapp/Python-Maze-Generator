@@ -33,9 +33,9 @@ pledgeAlgorithmButton = Button(buttonFont, pledgeAlgorithmTxt, (wallFollowerButt
 tremauxAlgorithmButton = Button(buttonFont, tremauxAlgorithmTxt, (pledgeAlgorithmButton.rect.right + 50, 0))
 
 buttons = pg.sprite.Group(generateMazeButton,  randomMouseButton, wallFollowerButton, pledgeAlgorithmButton, tremauxAlgorithmButton)
-
+# self, width, height, xPosition, yPosition, cellSize, screen
 def GenerateMaze():
-    maze = Maze(0, 0, 1, screen)
+    maze = Maze(1500, 800, int(width/2) - 750, int(height/2) - 400, 25, screen)
 
 def RandomMouseSolve():
     print()
