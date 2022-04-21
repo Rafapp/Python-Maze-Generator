@@ -5,6 +5,7 @@ from pygame.locals import *
 import time
 import random
 from button import Button
+from maze import Maze, Cell
 
 running = True
 
@@ -17,7 +18,7 @@ height = screen.get_height()
 
 size = (width, height)
 
-buttonFont = pg.font.Font("Fonts/MINECRAFT.TTF", int(width / 40))
+buttonFont = pg.font.Font("Fonts/MINECRAFT.TTF", int(width / 80))
 
 generateMazeTxt = "Generate Maze"
 randomMouseTxt = "Random Mouse Solve"
@@ -26,37 +27,41 @@ pledgeAlgorithmTxt = "Pledge Algorithm Solve"
 tremauxAlgorithmTxt = "Tremaux Algorithm Solve"
 
 generateMazeButton = Button(buttonFont, generateMazeTxt, (0, 0))
-randomMouseButton = Button(buttonFont, randomMouseTxt, (0, generateMazeButton.rect.bottom))
-wallFollowerButton = Button(buttonFont, wallFollowerTxt, (0, randomMouseButton.rect.bottom))
-pledgeAlgorithmButton = Button(buttonFont, pledgeAlgorithmTxt, (0, wallFollowerButton.rect.bottom))
-tremauxAlgorithmButton = Button(buttonFont, tremauxAlgorithmTxt, (0, pledgeAlgorithmButton.rect.bottom))
+randomMouseButton = Button(buttonFont, randomMouseTxt, (generateMazeButton.rect.right + 50, 0))
+wallFollowerButton = Button(buttonFont, wallFollowerTxt, (randomMouseButton.rect.right + 50, 0))
+pledgeAlgorithmButton = Button(buttonFont, pledgeAlgorithmTxt, (wallFollowerButton.rect.right + 50, 0))
+tremauxAlgorithmButton = Button(buttonFont, tremauxAlgorithmTxt, (pledgeAlgorithmButton.rect.right + 50, 0))
 
 buttons = pg.sprite.Group(generateMazeButton,  randomMouseButton, wallFollowerButton, pledgeAlgorithmButton, tremauxAlgorithmButton)
 
+def GenerateMaze():
+    maze = Maze(0, 0, 1, screen)
+
+def RandomMouseSolve():
+    print()
+
+def WallFollowerSolve():
+    print()
+
+def PledgeAlgorithmSolve():
+    print()
+
+def TremauxAlgorithmSolve():
+    print()
+
+def Reset():
+    print()
+
+dict = {generateMazeButton: GenerateMaze, randomMouseButton: RandomMouseSolve, wallFollowerButton: WallFollowerSolve, pledgeAlgorithmButton:PledgeAlgorithmSolve,tremauxAlgorithmButton:TremauxAlgorithmSolve}
 screen.fill('black')
 buttons.draw(screen)
+buttons.update()
 #MAIN LOOP
 while running:
     
     pg.display.set_caption("Maze Generator and Solver! : Press ESC to quit")
+    
 
-    def GenerateMaze():
-        print()
-
-    def RandomMouseSolve():
-        print()
-
-    def WallFollowerSolve():
-        print()
-
-    def PledgeAlgorithmSolve():
-        print()
-
-    def TremauxAlgorithmSolve():
-        print()
-
-    def Reset():
-        print()
     pg.display.update()
 
 # Quit game on esc key
@@ -66,6 +71,12 @@ while running:
         elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
             pg.quit()
             running = False
+        elif event.type == pg.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                for button in buttons:
+                    if button.rect.collidepoint(x, y):
+                        dict[button]()
+                        
 pg.quit()
 
 
