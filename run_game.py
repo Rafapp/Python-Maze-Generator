@@ -53,6 +53,7 @@ def Reset():
     print()
 
 dict = {generateMazeButton: GenerateMaze, randomMouseButton: RandomMouseSolve, wallFollowerButton: WallFollowerSolve, pledgeAlgorithmButton:PledgeAlgorithmSolve,tremauxAlgorithmButton:TremauxAlgorithmSolve}
+
 screen.fill('black')
 buttons.draw(screen)
 buttons.update()
@@ -78,10 +79,3 @@ while running:
                         dict[button]()
                         
 pg.quit()
-
-
-
-
-
-
-
