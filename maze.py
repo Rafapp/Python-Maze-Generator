@@ -12,14 +12,12 @@ class Maze():
         self.cellSize = cellSize
         self.screen = screen
         print("Initialized maze")
-        self.make_maze()
-        print('Maze drawn')
-
-    def make_maze(self):
-        for i in range(self.width):
-            for j in range(self.height):
+        for i in range(500):
+            for j in range(500):
                 rect = pg.rect.Rect(i,j,cellSize,cellSize)
-                pg.draw.rect(self.screen, "white", rect)
+                pg.draw.rect(screen, "white", rect)
+        print('Maze drawn')
+                
 
 
 
