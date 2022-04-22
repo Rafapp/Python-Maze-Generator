@@ -1,4 +1,3 @@
-from turtle import width
 import pygame as pg
 import random
 
@@ -10,12 +9,12 @@ class Maze():
         self.yPosition = yPosition
         self.cellSize = cellSize
         self.screen = screen
-        
+
         maze = [[True for x in range(width)] for y in range(height)]
         
         def RenderMaze():
-            for x in range(0, width):
-                for y in range(0, height):
+            for x in range(0, len(maze)):
+                for y in range(0, len(maze[0])):
                     if(maze[x][y] == True):
                         cellRect = pg.rect.Rect(xPosition + (x * cellSize), yPosition + (y * cellSize), cellSize, cellSize)
                         pg.draw.rect(screen, "white", cellRect)

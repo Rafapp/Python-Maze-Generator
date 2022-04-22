@@ -35,13 +35,13 @@ tremauxAlgorithmButton = Button(buttonFont, tremauxAlgorithmTxt, (pledgeAlgorith
 buttons = pg.sprite.Group(generateMazeButton,  randomMouseButton, wallFollowerButton, pledgeAlgorithmButton, tremauxAlgorithmButton)
 
 def GenerateMaze():
-    # FOR SOME REASON HAS TO BE EQUILATERAL, FIX LATER
+    # NOT CENTERING IF NOT EQUILATERAL, DIMENSIONS ARE FLIPPED, FIX LATER
     maze_width = 50
     maze_height = 50
     maze_cellsize = 10
 
     # self, width, height, xPosition, yPosition, cellSize, screen
-    rafamaze = Maze(maze_width, maze_height, int(width / 2) - int(maze_width / 2) * maze_cellsize, int(height / 2) - int(maze_height / 2) * maze_cellsize , 10, screen)
+    rafamaze = Maze(maze_width, maze_height, int(width / 2) - int((maze_width * maze_cellsize)/2),  int(height / 2) - int((maze_height * maze_cellsize)/2), maze_cellsize, screen)
     
 
 def RandomMouseSolve():
