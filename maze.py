@@ -1,3 +1,4 @@
+from fileinput import close
 import pygame as pg
 import random
 
@@ -205,12 +206,10 @@ class Maze():
                 if (maze[1][i] == cell):
                     maze[0][i] = cell
                     break
-            
                 
         def RenderMaze():
             for x in range(0, len(maze)):
                 for y in range(0, len(maze[0])):
-                    
                     # If unvisited draw in red
                     if(maze[x][y] == unvisited):
                         cellRect = pg.rect.Rect(xPosition + (x * cellSize), yPosition + (y * cellSize), cellSize, cellSize)
@@ -225,9 +224,9 @@ class Maze():
                     else:
                         cellRect = pg.rect.Rect(xPosition + (x * cellSize), yPosition + (y * cellSize), cellSize, cellSize)
                         pg.draw.rect(screen, "white", cellRect)
-
                     pg.display.update()
 
+        
         # Render unvisited maze
         RenderMaze()
 
@@ -242,5 +241,6 @@ class Maze():
         # Render adding the entrance and exit paths
         EnsureSolvability()
         RenderMaze()
+        
 
 

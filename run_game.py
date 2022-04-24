@@ -11,12 +11,9 @@ running = True
 
 # INIT
 pg.init()
-screen = pg.display.set_mode((1920, 1080), pg.FULLSCREEN)
-
+screen = pg.display.set_mode((1800, 900))#, pg.FULLSCREEN)
 width = screen.get_width()
 height = screen.get_height()
-
-size = (width, height)
 
 buttonFont = pg.font.Font("Fonts/MINECRAFT.TTF", int(width / 80))
 
@@ -43,6 +40,7 @@ def GenerateMaze():
     # self, width, height, xPosition, yPosition, cellSize, screen
     rafamaze = Maze(maze_width, maze_height, int(width / 2) - int((maze_width * maze_cellsize)/2),  int(height / 2) - int((maze_height * maze_cellsize)/2), maze_cellsize, screen)
     
+
 # To be added soon! ...
 def RandomMouseSolve():
     print()
@@ -71,12 +69,12 @@ pg.display.update()
 # Render buttons
 buttons.draw(screen)
 buttons.update()
+pg.display.update()
 
 #MAIN LOOP
 while running:
     
     pg.display.set_caption("Maze Generator and Solver! : Press ESC to quit")
-    pg.display.update()
 
 # Quit game on esc key
     for event in pg.event.get():
