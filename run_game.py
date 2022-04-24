@@ -5,7 +5,7 @@ from pygame.locals import *
 import time
 import random
 from button import Button
-from RafaMaze import Maze
+from Maze import Maze
 
 running = True
 
@@ -21,29 +21,29 @@ size = (width, height)
 buttonFont = pg.font.Font("Fonts/MINECRAFT.TTF", int(width / 80))
 
 generateMazeTxt = "Generate Maze"
-randomMouseTxt = "Random Mouse Solve"
-wallFollowerTxt = "Wall Follower Solve"
-pledgeAlgorithmTxt = "Pledge Algorithm Solve"
-tremauxAlgorithmTxt = "Tremaux Algorithm Solve"
+# randomMouseTxt = "Random Mouse Solve"
+# wallFollowerTxt = "Wall Follower Solve"
+# pledgeAlgorithmTxt = "Pledge Algorithm Solve"
+# tremauxAlgorithmTxt = "Tremaux Algorithm Solve"
 
 generateMazeButton = Button(buttonFont, generateMazeTxt, (0, 0))
-randomMouseButton = Button(buttonFont, randomMouseTxt, (generateMazeButton.rect.right + 50, 0))
-wallFollowerButton = Button(buttonFont, wallFollowerTxt, (randomMouseButton.rect.right + 50, 0))
-pledgeAlgorithmButton = Button(buttonFont, pledgeAlgorithmTxt, (wallFollowerButton.rect.right + 50, 0))
-tremauxAlgorithmButton = Button(buttonFont, tremauxAlgorithmTxt, (pledgeAlgorithmButton.rect.right + 50, 0))
+# randomMouseButton = Button(buttonFont, randomMouseTxt, (generateMazeButton.rect.right + 50, 0))
+# wallFollowerButton = Button(buttonFont, wallFollowerTxt, (randomMouseButton.rect.right + 50, 0))
+# pledgeAlgorithmButton = Button(buttonFont, pledgeAlgorithmTxt, (wallFollowerButton.rect.right + 50, 0))
+# tremauxAlgorithmButton = Button(buttonFont, tremauxAlgorithmTxt, (pledgeAlgorithmButton.rect.right + 50, 0))
 
-buttons = pg.sprite.Group(generateMazeButton,  randomMouseButton, wallFollowerButton, pledgeAlgorithmButton, tremauxAlgorithmButton)
+buttons = pg.sprite.Group(generateMazeButton)#,  randomMouseButton, wallFollowerButton, pledgeAlgorithmButton, tremauxAlgorithmButton)
 
 def GenerateMaze():
     # NOT CENTERING IF NOT EQUILATERAL, DIMENSIONS ARE FLIPPED, FIX LATER
     maze_width = 50
     maze_height = 50
-    maze_cellsize = 10
+    maze_cellsize = 15
 
     # self, width, height, xPosition, yPosition, cellSize, screen
     rafamaze = Maze(maze_width, maze_height, int(width / 2) - int((maze_width * maze_cellsize)/2),  int(height / 2) - int((maze_height * maze_cellsize)/2), maze_cellsize, screen)
     
-
+# To be added soon! ...
 def RandomMouseSolve():
     print()
 
@@ -59,7 +59,7 @@ def TremauxAlgorithmSolve():
 def Reset():
     print()
 
-dict = {generateMazeButton: GenerateMaze, randomMouseButton: RandomMouseSolve, wallFollowerButton: WallFollowerSolve, pledgeAlgorithmButton:PledgeAlgorithmSolve,tremauxAlgorithmButton:TremauxAlgorithmSolve}
+dict = {generateMazeButton: GenerateMaze}#, randomMouseButton: RandomMouseSolve, wallFollowerButton: WallFollowerSolve, pledgeAlgorithmButton:PledgeAlgorithmSolve,tremauxAlgorithmButton:TremauxAlgorithmSolve}
 
 screen.fill((35,39,42))
 
