@@ -1,4 +1,4 @@
-# Python-Maze-Solver
+# Python-Maze-Generator
 ### A maze generator showcasing the Randomized Prim's Algorithm
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/38381290/164995235-f23c8e51-d5d2-46fe-b63f-bd563f71745e.gif)
 ### How to Run
@@ -8,6 +8,15 @@
 ### Contributors
 - Rafael Padilla Perez (Maze generation, pygame implementation)
 - Logan Dang (pygame implementation)
+
+### Future plans
+- Implement maze solver algorithms such as:
+  - Random mouse
+  - WallFollower
+  - Pledge algorithm
+  - Tremaux's algorithm
+  - DFS
+  - BFS
 
 References:
 
