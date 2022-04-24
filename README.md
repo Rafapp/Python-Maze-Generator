@@ -1,6 +1,6 @@
 # Python-Maze-Solver
 ### A maze generator showcasing the Randomized Prim's Algorithm
-
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/38381290/164995235-f23c8e51-d5d2-46fe-b63f-bd563f71745e.gif)
 ### How to Run
 - Clone project using <code>git clone https://github.com/Rafapp/Python-Maze-Solver.git</code>
 - <code>python -m pip install -f dependencies.txt</code>
