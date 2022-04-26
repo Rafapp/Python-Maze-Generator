@@ -5,7 +5,7 @@ from pygame.locals import *
 import time
 import random
 from button import Button
-from Maze import Maze
+from maze import Maze
 
 running = True
 
