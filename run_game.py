@@ -25,6 +25,7 @@ bfsText = 'Solve BFS'
 # wallFollowerTxt = "Wall Follower Solve"
 # pledgeAlgorithmTxt = "Pledge Algorithm Solve"
 # tremauxAlgorithmTxt = "Tremaux Algorithm Solve"
+showPath = 'Show Path'
 
 generateMazeButton = Button(buttonFont, generateMazeTxt, (0, 0))
 dfsButton = Button(buttonFont, dfsText, (generateMazeButton.rect.right + 50, 0))
@@ -33,6 +34,8 @@ bfsButton = Button(buttonFont, bfsText, (dfsButton.rect.right + 50, 0))
 # wallFollowerButton = Button(buttonFont, wallFollowerTxt, (randomMouseButton.rect.right + 50, 0))
 # pledgeAlgorithmButton = Button(buttonFont, pledgeAlgorithmTxt, (wallFollowerButton.rect.right + 50, 0))
 # tremauxAlgorithmButton = Button(buttonFont, tremauxAlgorithmTxt, (pledgeAlgorithmButton.rect.right + 50, 0))
+showPathButton = Button(buttonFont, showPath, (0, 0))
+showPathButton.rect.right = width
 
 buttons = pg.sprite.Group(generateMazeButton)#,  randomMouseButton, wallFollowerButton, pledgeAlgorithmButton, tremauxAlgorithmButton)
 
@@ -65,9 +68,9 @@ def DfsSolve():
 def BfsSolve():
     global player, solve
     player.checked = {}
-    player.queue = []
     player.turn = 0
     player.x, player.y = maze.start
+    player.queue = [[(player.x, player.y)]]
     solve = 'bfs'
 
 def RandomMouseSolve():
@@ -81,11 +84,11 @@ def PledgeAlgorithmSolve():
 
 def TremauxAlgorithmSolve():
     print()
+    
+def DrawPath():
+    player.draw_path(screen)
 
-def Reset():
-    print()
-
-dict = {generateMazeButton: GenerateMaze, dfsButton: DfsSolve, bfsButton: BfsSolve}#, randomMouseButton: RandomMouseSolve, wallFollowerButton: WallFollowerSolve, pledgeAlgorithmButton:PledgeAlgorithmSolve,tremauxAlgorithmButton:TremauxAlgorithmSolve}
+dict = {generateMazeButton: GenerateMaze, dfsButton: DfsSolve, bfsButton: BfsSolve, showPathButton: DrawPath}#, randomMouseButton: RandomMouseSolve, wallFollowerButton: WallFollowerSolve, pledgeAlgorithmButton:PledgeAlgorithmSolve,tremauxAlgorithmButton:TremauxAlgorithmSolve}
 
 screen.fill((35,39,42))
 
@@ -119,8 +122,11 @@ while running:
                         dict[button]()
     if player:
         player.update(screen)
-    if solve:
-        solves[solve](screen)
+        if solve:
+            solves[solve](screen)
+        if (player.x, player.y) == maze.end:
+            solve = None
+            buttons.add(showPathButton)
     buttons.draw(screen)
     pg.display.update()
     clock.tick(60)

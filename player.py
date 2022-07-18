@@ -34,13 +34,13 @@ class Player(pygame.sprite.Sprite):
                 self.__handle_move(screen)
                 self.x += 1
                 self.stack.append((self.x, self.y))
-            elif self.x - 1 >= 0 and self.maze.grid[self.x - 1][self.y] == 'c' and (self.x - 1, self.y) not in self.checked: 
-                self.__handle_move(screen)
-                self.x -= 1
-                self.stack.append((self.x, self.y))
             elif self.y + 1 < len(self.maze.grid[0]) and self.maze.grid[self.x][self.y + 1] == 'c' and (self.x, self.y + 1) not in self.checked:
                 self.__handle_move(screen)
                 self.y += 1
+                self.stack.append((self.x, self.y))
+            elif self.x - 1 >= 0 and self.maze.grid[self.x - 1][self.y] == 'c' and (self.x - 1, self.y) not in self.checked: 
+                self.__handle_move(screen)
+                self.x -= 1
                 self.stack.append((self.x, self.y))
             elif self.y - 1 >= 0 and self.maze.grid[self.x][self.y - 1] == 'c' and (self.x, self.y - 1) not in self.checked:
                 self.__handle_move(screen)
@@ -51,26 +51,41 @@ class Player(pygame.sprite.Sprite):
                 self.stack.pop(-1)
                 self.x, self.y = self.stack[-1]
             self.update(screen)
+        self.path = self.stack
     
     def solveBFS(self, screen):
         if (self.x, self.y) != self.maze.end:
-            if self.maze.grid[self.x + 1][self.y] == 'c' and self.x + 1 < len(self.maze.grid) and (self.x + 1, self.y) not in self.checked: 
-                self.checked[(self.x + 1, self.y)] = None
-                self.queue.append((self.x + 1, self.y))
-            if self.maze.grid[self.x - 1][self.y] == 'c' and self.x - 1 >= 0 and (self.x - 1, self.y) not in self.checked: 
-                self.checked[(self.x - 1, self.y)] = None
-                self.queue.append((self.x - 1, self.y))
-            if self.maze.grid[self.x][self.y + 1] == 'c' and self.y + 1 < len(self.maze.grid[0]) and (self.x, self.y + 1) not in self.checked:
-                self.checked[(self.x, self.y + 1)] = None
-                self.queue.append((self.x, self.y + 1))
-            if self.maze.grid[self.x][self.y - 1] == 'c' and self.y - 1 >= 0 and (self.x, self.y - 1) not in self.checked:
-                self.checked[(self.x, self.y - 1)] = None
-                self.queue.append((self.x, self.y - 1))
-                
-            if self.queue:
+            if self.queue: 
+                self.path = self.queue.pop(0)
                 self.__handle_move(screen)
-                self.x, self.y = self.queue.pop(0)
+                self.x, self.y = self.path[-1]
+            
+            if self.x + 1 < len(self.maze.grid) and self.maze.grid[self.x + 1][self.y] == 'c' and (self.x + 1, self.y) not in self.checked: 
+                self.checked[(self.x + 1, self.y)] = None
+                temp = list(self.path)
+                temp.append((self.x + 1, self.y))
+                self.queue.append(temp)
+            if self.x - 1 >= 0 and self.maze.grid[self.x - 1][self.y] == 'c' and (self.x - 1, self.y) not in self.checked: 
+                self.checked[(self.x - 1, self.y)] = None
+                temp = list(self.path)
+                temp.append((self.x - 1, self.y))
+                self.queue.append(temp)
+            if self.y + 1 < len(self.maze.grid[0]) and self.maze.grid[self.x][self.y + 1] == 'c' and (self.x, self.y + 1) not in self.checked:
+                self.checked[(self.x, self.y + 1)] = None
+                temp = list(self.path)
+                temp.append((self.x, self.y + 1))
+                self.queue.append(temp)
+            if self.y - 1 >= 0 and self.maze.grid[self.x][self.y - 1] == 'c' and (self.x, self.y - 1) not in self.checked:
+                self.checked[(self.x, self.y - 1)] = None
+                temp = list(self.path)
+                temp.append((self.x, self.y - 1))
+                self.queue.append(temp)
             self.update(screen)
+            
+    def draw_path(self, screen):
+        for x, y in self.path:
+            cell_rect = pygame.rect.Rect(self.maze.xPosition + (x * self.maze.cellSize), self.maze.yPosition + (y * self.maze.cellSize), self.maze.cellSize, self.maze.cellSize)
+            pygame.draw.rect(screen, 'green', cell_rect)
         
     def update(self, screen: pygame.Surface, *args, **kwargs) -> None:
         self.rect = pygame.rect.Rect(self.maze.xPosition + (self.x * self.maze.cellSize), self.maze.yPosition + (self.y * self.maze.cellSize), self.maze.cellSize, self.maze.cellSize)
