@@ -20,6 +20,7 @@ buttonFont = pg.font.Font("Fonts/MINECRAFT.TTF", int(width / 80))
 
 generateMazeTxt = "Generate Maze"
 dfsText = 'Solve DFS'
+bfsText = 'Solve BFS'
 # randomMouseTxt = "Random Mouse Solve"
 # wallFollowerTxt = "Wall Follower Solve"
 # pledgeAlgorithmTxt = "Pledge Algorithm Solve"
@@ -27,6 +28,7 @@ dfsText = 'Solve DFS'
 
 generateMazeButton = Button(buttonFont, generateMazeTxt, (0, 0))
 dfsButton = Button(buttonFont, dfsText, (generateMazeButton.rect.right + 50, 0))
+bfsButton = Button(buttonFont, bfsText, (dfsButton.rect.right + 50, 0))
 # randomMouseButton = Button(buttonFont, randomMouseTxt, (generateMazeButton.rect.right + 50, 0))
 # wallFollowerButton = Button(buttonFont, wallFollowerTxt, (randomMouseButton.rect.right + 50, 0))
 # pledgeAlgorithmButton = Button(buttonFont, pledgeAlgorithmTxt, (wallFollowerButton.rect.right + 50, 0))
@@ -45,9 +47,10 @@ def GenerateMaze():
     maze = Maze(maze_width, maze_height, int(width / 2) - int((maze_width * maze_cellsize)/2),  int(height / 2) - int((maze_height * maze_cellsize)/2), maze_cellsize, screen)
     player = Player(maze)
     solves = {
-        'dfs': player.solveDFS
+        'dfs': player.solveDFS,
+        'bfs': player.solveBFS
     }
-    buttons.add(dfsButton)
+    buttons.add(dfsButton, bfsButton)
     solve = None
     
 # To be added soon! ...
@@ -59,6 +62,13 @@ def DfsSolve():
     player.x, player.y = maze.start
     solve = 'dfs'
     
+def BfsSolve():
+    global player, solve
+    player.checked = {}
+    player.queue = []
+    player.turn = 0
+    player.x, player.y = maze.start
+    solve = 'bfs'
 
 def RandomMouseSolve():
     print()
@@ -75,7 +85,7 @@ def TremauxAlgorithmSolve():
 def Reset():
     print()
 
-dict = {generateMazeButton: GenerateMaze, dfsButton: DfsSolve}#, randomMouseButton: RandomMouseSolve, wallFollowerButton: WallFollowerSolve, pledgeAlgorithmButton:PledgeAlgorithmSolve,tremauxAlgorithmButton:TremauxAlgorithmSolve}
+dict = {generateMazeButton: GenerateMaze, dfsButton: DfsSolve, bfsButton: BfsSolve}#, randomMouseButton: RandomMouseSolve, wallFollowerButton: WallFollowerSolve, pledgeAlgorithmButton:PledgeAlgorithmSolve,tremauxAlgorithmButton:TremauxAlgorithmSolve}
 
 screen.fill((35,39,42))
 
@@ -113,6 +123,6 @@ while running:
         solves[solve](screen)
     buttons.draw(screen)
     pg.display.update()
-    # clock.tick(60)
+    clock.tick(60)
         
 pg.quit()

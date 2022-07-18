@@ -50,7 +50,27 @@ class Player(pygame.sprite.Sprite):
                 self.__handle_move(screen)
                 self.stack.pop(-1)
                 self.x, self.y = self.stack[-1]
-            
+            self.update(screen)
+    
+    def solveBFS(self, screen):
+        if (self.x, self.y) != self.maze.end:
+            if self.maze.grid[self.x + 1][self.y] == 'c' and self.x + 1 < len(self.maze.grid) and (self.x + 1, self.y) not in self.checked: 
+                self.checked[(self.x + 1, self.y)] = None
+                self.queue.append((self.x + 1, self.y))
+            if self.maze.grid[self.x - 1][self.y] == 'c' and self.x - 1 >= 0 and (self.x - 1, self.y) not in self.checked: 
+                self.checked[(self.x - 1, self.y)] = None
+                self.queue.append((self.x - 1, self.y))
+            if self.maze.grid[self.x][self.y + 1] == 'c' and self.y + 1 < len(self.maze.grid[0]) and (self.x, self.y + 1) not in self.checked:
+                self.checked[(self.x, self.y + 1)] = None
+                self.queue.append((self.x, self.y + 1))
+            if self.maze.grid[self.x][self.y - 1] == 'c' and self.y - 1 >= 0 and (self.x, self.y - 1) not in self.checked:
+                self.checked[(self.x, self.y - 1)] = None
+                self.queue.append((self.x, self.y - 1))
+                
+            if self.queue:
+                self.__handle_move(screen)
+                self.x, self.y = self.queue.pop(0)
+            self.update(screen)
         
     def update(self, screen: pygame.Surface, *args, **kwargs) -> None:
         self.rect = pygame.rect.Rect(self.maze.xPosition + (self.x * self.maze.cellSize), self.maze.yPosition + (self.y * self.maze.cellSize), self.maze.cellSize, self.maze.cellSize)
@@ -59,7 +79,7 @@ class Player(pygame.sprite.Sprite):
     
     
     def __handle_move(self, screen):
-        if (self.x, self.y) not in self.checked:
+        if (self.x, self.y) not in self.checked or self.checked[(self.x, self.y)] is None:
             turn = self.turn
             self.turn += 1
         else:
